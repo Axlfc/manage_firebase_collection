@@ -24,8 +24,12 @@ def get_program_list():
     return trimmed
 
 
+def get_bloat_program_list():
+    return ["Microsoft.ZuneMusic", "Microsoft.Music.Preview", "Microsoft.XboxGameCallableUI", "Microsoft.XboxIdentityProvider", "Microsoft.BingTravel", "Microsoft.BingHealthAndFitness", "Microsoft.BingFoodAndDrink", "Microsoft.People", "Microsoft.BingFinance", "Microsoft.3DBuilder", "Microsoft.WindowsCalculator", "Microsoft.BingNews", "Microsoft.XboxApp", "Microsoft.BingSports", "Microsoft.WindowsCamera", "Microsoft.Getstarted", "Microsoft.Office.OneNote", "Microsoft.WindowsMaps", "Microsoft.MicrosoftSolitaireCollection", "Microsoft.MicrosoftOffi1ceHub", "Microsoft.BingWeather", "Microsoft.BioEnrollment", "Microsoft.WindowsStore", "Microsoft.Windows.Photos", "Microsoft.WindowsPhone"]
+
+
 def sew_url(collection):
-    return "https://firebasestorage.googleapis.com/v0/b/scriptsstudio-axlfcxrppy.appspot.com/o/Program%20Icons%2F" + collection + "_icon.ico?alt=media"
+    return "https://firebasestorage.googleapis.com/v0/b/scriptsstudio-axlfcxrppy.appspot.com/o/Bloatware%2F" + collection + "?alt=media"
 
 
 # PROGRAMS
@@ -43,13 +47,14 @@ def get_db_pointer():
 
 
 programs = {}
-syst = ["Linux", "Windows"]
+syst = ["Windows"]
 
-for i in get_program_list():
-    programs[i] = {"logo": sew_url(i), "nameDisplay": i.capitalize(), "tag": "Development", "system": syst, "nameLinux": i, "nameWindows": i}
+for i in get_bloat_program_list():
+    programs[i] = {"logo": sew_url(i), "nameDisplay": i.capitalize(),  "system": syst, "nameSystem": i}
 #print(programs)
 
 db = get_db_pointer()
 for program in programs.values():
-    doc_ref = db.collection("Applications").document()
+    doc_ref = db.collection("Bloatware").document()
     set_new_collection(doc_ref, program)
+
